@@ -1,0 +1,33 @@
+Problem 1: Using sobel algorithm  and Thresholding 
+1. Sobel and Robert with Threshold :
+Sobel Kernel Gx = [-1 0 +1;  -2 0 +2;  -1 0 +1];        Gy = [+1 +2 +1;  0 0 0; -1 -2 -1];
+Robert Kernel Gx = [0 0 0;   0 1 0;  0 0 -1];		 Gy = [0 0 1;   0 -1 0;   0 0 0];
+
+2. Set manual thresholds to the resultant Gradient Image in GrayScale: 
+   Sobel: Result Link for  Example 1:  Gradient Mag >230  255 
+   		       Gradient Mag< 230 is 0
+   Robert: Result Link for Example  2:  Gradient Mag >30  255 
+   		       Gradient Mag< 30 is 0
+
+3. I have used Zhang Suen algorithm for thinning 
+     Pixel Form :  P = 
+P9 P2 P3
+        			P8 P1 P4
+        			P7 P6 P5
+
+    Parse 1: 
+               P = [P1 P2 P3 P4 P5 P6 P7 P8 P9 P2]
+               Checking Parse 1 conditions
+               1. P1 is black
+               2. Number of nonZero pixel neighbours of P1 is between and 6
+               3. Number of 0 to 1 transition in [P2...P9,P2] is measured by count.
+ 	  4. P2*P4*P6 = 0?
+               5. P4*P6*P8 = 0?
+    Parse 2:
+                The rule from 1 to 3 are the same but 4 and 5 are:
+  4: P2*P4*P5 = 0 
+  5:P2*P6*P8 = 0
+The result for this test can be viewed here.
+To Run Sobel with Threshold:  [gradientMag, gradientDir] = sobel(‘test1.png’)
+To Run Robert with Threshold: [gradientMag, gradientDir] = robert(‘test1.png’)
+To Run ZhangSuenThinning algorithm: ZhangSuenThinning(‘test3.gif’) 
